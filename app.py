@@ -26,11 +26,11 @@ def encode_image_to_base64(image_path):
 
 # Streamlit 
 st.set_page_config(page_title='Tablero Inteligente')
-st.title('Tablero Inteligente')
+st.title('Not-so-smart Board')
 with st.sidebar:
-    st.subheader("Acerca de:")
-    st.subheader("En esta aplicación veremos la capacidad que ahora tiene una máquina de interpretar un boceto")
-st.subheader("Dibuja el boceto en el panel  y presiona el botón para analizarla")
+    st.subheader("About:")
+    st.subheader("Here we're going to see an AI do its not-so-best to describe whatever you draw. It's really tired, so it won't do all that well.")
+st.subheader("Draw in here and then press the button when you're finished")
 
 # Add canvas component
 #bg_image = st.sidebar.file_uploader("Cargar Imagen:", type=["png", "jpg"])
@@ -57,7 +57,7 @@ canvas_result = st_canvas(
     key="canvas",
 )
 
-ke = st.text_input('Ingresa tu Clave')
+ke = st.text_input('Insert key here')
 #os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 os.environ['OPENAI_API_KEY'] = ke
 
@@ -68,7 +68,7 @@ api_key = os.environ['OPENAI_API_KEY']
 # Initialize the OpenAI client with the API key
 client = OpenAI(api_key=api_key)
 
-analyze_button = st.button("Analiza la imagen", type="secondary")
+analyze_button = st.button("Describe my shitty drawing!", type="secondary")
 
 # Check if an image has been uploaded, if the API key is available, and if the button has been pressed
 if canvas_result.image_data is not None and api_key and analyze_button:
@@ -83,7 +83,7 @@ if canvas_result.image_data is not None and api_key and analyze_button:
  
         base64_image = encode_image_to_base64("img.png")
             
-        prompt_text = (f"Describe in spanish briefly the image")
+        prompt_text = (f"Describe the image with really poor and nutshell-y wording that sounds like a lazy child.")
     
       # Create the payload for the completion request
         messages = [
